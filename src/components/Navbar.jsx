@@ -1,38 +1,48 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-function Navbar({ isDark, toggleTheme, onLogout, openAbout, openTeam, openPrivacy }) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+function Navbar({
+  isDark,
+  toggleTheme,
+  openAbout,
+  openTeam,
+  openPrivacy,
+  onHome,
+  user,
+  onLogout
+}) {
 
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const [menu, setMenu] = useState(false);
 
   return (
-    <nav className="navbar glass-nav">
-      <div className="logo"><h2>CodeMeetly</h2></div>
-      <div className="nav-links">
-        <a onClick={() => { /* home shows landing, but we need to change view - we'll handle via App state */ }}>Home</a>
+    <nav className="navbar">
+
+      <div className="logo" onClick={onHome}>
+        CodeMeetly
+      </div>
+
+      <div className={`nav-links ${menu ? "active" : ""}`}>
+        <a onClick={onHome}>Home</a>
         <a onClick={openAbout}>About</a>
         <a onClick={openTeam}>Team</a>
+        <a onClick={openPrivacy}>Privacy</a>
       </div>
-      <div className="nav-actions">
-        <div className="theme-toggle" id="themeToggle" onClick={toggleTheme}>
-          <i className={`fas fa-sun ${!isDark ? 'active' : ''}`}></i>
-          <i className={`fas fa-moon ${isDark ? 'active' : ''}`}></i>
-        </div>
-        <button className="logout-btn" id="logoutBtn" onClick={onLogout}>
-          <i className="fas fa-sign-out-alt"></i> <span>Logout</span>
+
+      <div className="nav-right">
+
+        {user && <span className="user">Hi, {user.fullName}</span>}
+
+        <button className="theme-btn" onClick={toggleTheme}>
+          {isDark ? "🌙" : "☀️"}
         </button>
-        <div className="menu-icon" id="menuIcon" onClick={toggleDropdown}>
-          <i className="fas fa-bars"></i>
-        </div>
+
+        <button className="logout-btn" onClick={onLogout}>
+          Logout
+        </button>
+
+        <div className="menu" onClick={() => setMenu(!menu)}>☰</div>
+
       </div>
-      {/* mobile dropdown */}
-      {dropdownOpen && (
-        <div className="mobile-dropdown show" id="mobileDropdown">
-          <a onClick={() => { /* Home action */ setDropdownOpen(false); }}>Home</a>
-          <a onClick={() => { openAbout(); setDropdownOpen(false); }}>About</a>
-          <a onClick={() => { openTeam(); setDropdownOpen(false); }}>Team</a>
-        </div>
-      )}
+
     </nav>
   );
 }

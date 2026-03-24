@@ -1,7 +1,14 @@
 function TeamModal({ isOpen, onClose }) {
-    if (!isOpen) return null;
-    return (
-      <div id="teamModal" className="modal show" style={{ maxWidth: '800px' }}>
+  if (!isOpen) return null;
+  
+  return (
+  
+  <div
+  className="modal-box"
+  style={{ maxWidth: '800px' }}
+  onClick={(e) => e.stopPropagation()}
+  >
+  ×
         <span className="close-modal" onClick={onClose}>&times;</span>
         <h2 style={{ textAlign: 'center' }}>👥 The Developers</h2>
         <div className="team-grid">

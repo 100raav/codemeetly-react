@@ -1,15 +1,22 @@
 function PrivacyModal({ isOpen, onClose }) {
-    if (!isOpen) return null;
-    return (
-      <div id="privacyModal" className="modal show">
-        <span className="close-modal" onClick={onClose}>&times;</span>
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+
+        <button className="modal-close" onClick={onClose}>×</button>
+
         <h2>Privacy Policy</h2>
-        <div className="privacy-content">
-          <p>Your privacy is important to us. CodeMeetly uses end‑to‑end encryption for all video, audio, and screen sharing. Chat messages are encrypted in transit. Room data is not stored permanently. We do not sell your personal information.</p>
-          <p>By using CodeMeetly, you agree to our data handling practices as described. For full details, contact the development team.</p>
-        </div>
+
+        <p>
+          Your data is secure. We do not store messages permanently.
+          All communication is encrypted.
+        </p>
+
       </div>
-    );
-  }
-  
-  export default PrivacyModal;
+    </div>
+  );
+}
+
+export default PrivacyModal;
