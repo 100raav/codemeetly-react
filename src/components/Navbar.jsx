@@ -16,9 +16,9 @@ function Navbar({
   return (
     <nav className="navbar">
 
-      <div className="logo" onClick={onHome}>
-        CodeMeetly
-      </div>
+<div className="logo" onClick={onHome}>
+  <h2>CodeMeetly</h2>
+</div>
 
       <div className={`nav-links ${menu ? "active" : ""}`}>
         <a onClick={onHome}>Home</a>
